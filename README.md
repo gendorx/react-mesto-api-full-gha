@@ -19,6 +19,9 @@
 ## Ссылки на проект
 
 IP-адрес 158.160.16.59
-Frontend https://http://gendorx-frontend.nomoredomains.monster
-Backend https://api.http://gendorx-frontend.nomoredomains.monster
+<br>
+Frontend https://gendorx-frontend.nomoredomains.monster
+<br>
+Backend https://api.gendorx-frontend.nomoredomains.monster
+<br>
 GitHub https://github.com/gendorx/react-mesto-api-full-gha

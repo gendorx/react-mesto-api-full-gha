@@ -18,7 +18,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.16.59
+IP 158.160.16.59
 <br>
 Frontend https://gendorx-frontend.nomoredomains.monster
 <br>

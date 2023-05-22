@@ -254,7 +254,7 @@ export default class App extends Component {
 
       this.setNewState({
         isLogged: true,
-        userEmail: ctx.data.email,
+        userEmail: ctx.email,
       });
 
       return true;

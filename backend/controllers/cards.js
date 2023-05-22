@@ -21,7 +21,7 @@ async function createCard(req, res, next) {
   const userId = req.user._id;
 
   try {
-    const card = await Card.create({ ...req.body, owner: userId });
+    const card = await (await Card.create({ ...req.body, owner: userId })).populate('owner');
 
     res.status(HTTP_STATUS_CREATED).send(card);
   } catch (err) {
@@ -72,7 +72,7 @@ async function removeCard(req, res, next) {
     const card = await Card.findById(cardId).populate('owner');
 
     if (!card) throw new NotFound('карточка не найдена');
-    if (!card.owner._id.equals(userId)) throw new ForbiddenError('невозможно удалить чужую карточку');
+    if (!card.owner._id.equals(userId)) { throw new ForbiddenError('невозможно удалить чужую карточку'); }
 
     await card.deleteOne();
 

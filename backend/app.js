@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
@@ -9,13 +7,9 @@ const router = require('./routes');
 const handleError = require('./middlewares/handleError');
 const { errorLogger, requestLogger } = require('./middlewares/loggerHandler');
 
-const app = express();
+const { HOST, PORT, DATABASE_URL } = require('./utils/config');
 
-const {
-  HOST = '127.0.0.1',
-  PORT = 3000,
-  DATABASE_URL = 'mongodb://localhost:27017/mestodb',
-} = process.env;
+const app = express();
 
 mongoose.connect(DATABASE_URL, {
   useNewUrlParser: true,

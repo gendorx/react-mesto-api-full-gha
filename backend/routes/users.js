@@ -1,38 +1,21 @@
 const express = require('express');
-const { celebrate, Joi } = require('celebrate');
-const { validatonUrl } = require('../utils/utils');
 
 const users = express.Router();
+
 const {
   getAllUsers,
   getUserById,
   updateUser,
   getCurrentUser,
 } = require('../controllers/users');
+const {
+  userFields: { getUserFields, updateUserFields, updateUserAvatarFields },
+} = require('../utils/validation');
 
 users.get('/', getAllUsers);
 users.get('/me', getCurrentUser);
-users.get(
-  '/:userId',
-  celebrate({
-    params: { userId: Joi.string().required().alphanum().length(24) },
-  }),
-  getUserById,
-);
-users.patch(
-  '/me',
-  celebrate({
-    body: {
-      about: Joi.string().required().min(2).max(30),
-      name: Joi.string().required().min(2).max(30),
-    },
-  }),
-  updateUser,
-);
-users.patch(
-  '/me/avatar',
-  celebrate({ body: { avatar: Joi.string().required().custom(validatonUrl) } }),
-  updateUser,
-);
+users.get('/:userId', getUserFields, getUserById);
+users.patch('/me', updateUserFields, updateUser);
+users.patch('/me/avatar', updateUserAvatarFields, updateUser);
 
 module.exports = users;

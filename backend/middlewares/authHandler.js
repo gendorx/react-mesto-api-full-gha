@@ -3,13 +3,13 @@ const { AuthError } = require('../utils/errors');
 
 const { JWT_SECRET } = require('../utils/constants');
 
-const authError = new AuthError('необходима авторизация');
+const authErrorMessage = 'необходима авторизация';
 
 function authHandler(req, res, next) {
   let authorization = req.get('authorization');
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    next(authError);
+    next(new AuthError(authErrorMessage));
     return;
   }
 
@@ -21,7 +21,7 @@ function authHandler(req, res, next) {
     req.user = payload;
     next();
   } catch (err) {
-    next(authError);
+    next(new AuthError(authErrorMessage));
   }
 }
 

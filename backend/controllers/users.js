@@ -4,7 +4,7 @@ const {
 const User = require('../models/user');
 const { NotFound, BadRequest } = require('../utils/errors');
 
-async function getAllUsers(req, res, next) {
+async function getAllUsers(_req, res, next) {
   try {
     const users = await User.find({});
 
@@ -14,19 +14,7 @@ async function getAllUsers(req, res, next) {
   }
 }
 
-async function getCurrentUser(req, res, next) {
-  try {
-    const user = await User.findOne({ _id: req.user._id });
-
-    res.send(user);
-  } catch (err) {
-    next(err);
-  }
-}
-
-async function getUserById(req, res, next) {
-  const { userId } = req.params;
-
+async function getUserDataById(userId, res, next) {
   try {
     const user = await User.findById(userId);
 
@@ -40,6 +28,16 @@ async function getUserById(req, res, next) {
       next(err);
     }
   }
+}
+
+async function getCurrentUser(req, res, next) {
+  return getUserDataById(req.user._id, res, next);
+}
+
+async function getUserById(req, res, next) {
+  const { userId } = req.params;
+
+  return getUserDataById(userId, res, next);
 }
 
 async function updateUser(req, res, next) {

@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 
 const { AuthError, ConfictError } = require('../utils/errors');
 const User = require('../models/user');
-const { JWT_SECRET } = require('../utils/constants');
+const { JWT_SECRET } = require('../utils/config');
 
 const authError = new AuthError('передан неверный логин или пароль');
 

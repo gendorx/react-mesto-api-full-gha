@@ -21,4 +21,8 @@ function validationEmail(value) {
   return value;
 }
 
-module.exports = { validateUrl, validatonUrl, validationEmail };
+module.exports = {
+  validateUrl,
+  validatonUrl,
+  validationEmail,
+};

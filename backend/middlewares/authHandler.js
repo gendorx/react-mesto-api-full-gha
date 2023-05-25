@@ -5,7 +5,7 @@ const { JWT_SECRET } = require('../utils/config');
 
 const authErrorMessage = 'необходима авторизация';
 
-function authHandler(req, res, next) {
+function authHandler(req, _res, next) {
   let authorization = req.get('authorization');
 
   if (!authorization || !authorization.startsWith('Bearer ')) {

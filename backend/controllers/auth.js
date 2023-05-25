@@ -8,7 +8,7 @@ const { AuthError, ConfictError } = require('../utils/errors');
 const User = require('../models/user');
 const { JWT_SECRET } = require('../utils/config');
 
-const authError = new AuthError('передан неверный логин или пароль');
+const authErrorMessage = 'передан неверный логин или пароль';
 
 async function createUser(req, res, next) {
   const {
@@ -49,10 +49,10 @@ async function loginUser(req, res, next) {
   try {
     const user = await User.findOne({ email }).select({ password: 1 });
 
-    if (!user) throw authError;
+    if (!user) throw new AuthError(authErrorMessage);
 
     const isCorrectPassword = await bcrypt.compare(password, user.password);
-    if (!isCorrectPassword) throw authError;
+    if (!isCorrectPassword) throw new AuthError(authErrorMessage);
 
     const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
 
